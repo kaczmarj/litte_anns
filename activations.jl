@@ -27,8 +27,10 @@ function positive_linear{T<:Number, N}(x::Array{T, N})::Array{T, N}
     return output
 end
 
+const INNER_ZERO_RETURN = 0.;
+
 function positive_linear{T<:Number}(x::T)::T
-    return max(x, 0.)
+    return max(x, INNER_ZERO_RETURN)
 end
 
 function link{T<:Number, N}(x::Array{T, N})::Array{T, N}
