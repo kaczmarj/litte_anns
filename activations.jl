@@ -14,9 +14,8 @@ function hyperbolic_tan_sigmoid(x::Float64)::Float64
     return (exp(x) - exp(-x)) / (exp(x) + exp(-x))
 end
 
-function positive_linear(x::Array{Float64})::nothing
-    indx = x .< 0
-    nz = sum(Int64.(indx))
-    x[indx] = [0. for i in 1:nz]
-    return nothing
+function positive_linear(x::Array{Float64})
+    indx = x .< 0.
+    x[indx] = [0. for i in 1:sum(Int64.(indx))]
+    return 
 end
