@@ -18,5 +18,5 @@ function positive_linear(x::Array{Float64})::Array{Float64}
     indx = x .< 0
     nz = sum(Int64.(indx))
     x[indx] = [0. for i in 1:nz]
-    return output
+    return x
 end
