@@ -13,4 +13,11 @@ relu_output = Act.positive_linear(vals);
 
 # or if you want in place mutation
 Act.positive_linear!(vals);
+
+
+# alternatively 
+include("activations.jl")
+relu_output = positive_linear(vals);
+# or
+positive_linear!(vals);
 ```
