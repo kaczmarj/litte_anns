@@ -27,9 +27,9 @@ function positive_linear{T<:Number, N}(x::Array{T, N})::Array{T, N}
     return output
 end
 
-const INNER_ZERO_RETURN = 0.;
+const INNER_ZERO_RETURN = Float64(0.);
 
-function positive_linear{T<:Number}(x::T)::T
+function positive_linear{T<:Number}(x::T)::Float64
     return max(x, INNER_ZERO_RETURN)
 end
 
