@@ -1,4 +1,4 @@
-include("Act.jl");
+include("../Act.jl");
 
 inputs = rand(10);
 weights = [.3 for i in 1:length(inputs)];

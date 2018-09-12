@@ -1,5 +1,5 @@
 using Distributions
-include("Act.jl");
+include("../Act.jl");
 
 N_HIDDEN = 4;
 N_LAYERS = 2;

@@ -1,4 +1,4 @@
-include("Act.jl");
+include("../Act.jl");
 using Distributions
 
 N_DATA = 10;

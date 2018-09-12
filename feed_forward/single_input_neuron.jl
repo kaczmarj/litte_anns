@@ -1,4 +1,4 @@
-include("Act.jl");
+include("../Act.jl");
 
 input = rand();
 weight = 0.5;
