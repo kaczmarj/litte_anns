@@ -1,3 +1,3 @@
 module Act
-    include("activations.jl")
+include("activations.jl")
 end
