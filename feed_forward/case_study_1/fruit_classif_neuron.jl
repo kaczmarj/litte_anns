@@ -5,7 +5,7 @@ include("../../Act.jl");
 optimal_weights = [0, 1, 0];
 optimal_bias = 0;
 
-# here we investigate the classification ability of a simple 2 input 1 neuron
+# here we investigate the classification ability of a simple 3 input 1 neuron
 # artificial neural network model
 
 inputs = [
