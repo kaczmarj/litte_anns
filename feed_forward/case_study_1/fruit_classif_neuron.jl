@@ -25,4 +25,8 @@ for stim_idx in 1:3
 end
 
 # measure model performance via sum squared error
+# this is actually not a good function here
 sse_metric = sum((y_true .- y_predicted).^2)
+
+# better metric for classification
+accuracy_metric = mean(y_true .== y_predicted)
