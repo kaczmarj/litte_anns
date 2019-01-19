@@ -42,7 +42,7 @@ loss_fn = t.nn.MSELoss()
 opt_fn = optim.Adam(net.parameters(), lr=lr)
 
 c = 0
-for epoch in np.arange(100):
+for epoch in np.arange(1000):
     c += 1
     batch_gen = feed_batches(X.shape[0], batch_n)
 
@@ -50,9 +50,16 @@ for epoch in np.arange(100):
         try:
             idxs = next(batch_gen)
             y_pred = net(X[idxs])
-            loss = loss_fn(y_pred, y[idxs])
+            loss = loss_fn(y_pred.squeeze(), y[idxs])
             opt_fn.zero_grad()
             loss.backward()
             opt_fn.step()
         except StopIteration:
             break
+
+
+# test the network on unseed data
+ntest = 400
+Xtest, ytest = return_ft(*make_xor_dataset(ntest))
+ypred = net(Xtest)
+print(t.sum(ypred.squeeze() == ytest) / ntest)
