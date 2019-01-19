@@ -21,3 +21,6 @@ relu_output = positive_linear(vals);
 # or
 positive_linear!(vals);
 ```
+
+## pytorch models
+aside from the ground up software, there are networks built for toy problems in pytorch
