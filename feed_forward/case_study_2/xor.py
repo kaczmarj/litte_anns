@@ -60,7 +60,7 @@ for epoch in np.arange(1000):
 
 # test the network on unseed data
 ntest = 400
-test_results  = np.zeros(1000)
+test_results = np.zeros(1000)
 
 for idx in range(1000):
     Xtest, ytest = return_ft(*make_xor_dataset(ntest))
