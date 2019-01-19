@@ -23,22 +23,22 @@ class XORNet(t.nn.Module):
         self.lin2 = t.nn.Linear(d_h, d_out)
 
     def forward(self, x):
-        return self.lin2(self.lin1(x).clamp(min=0)).clamp(min=0)
+        return self.lin2(self.lin1(x).clamp(min=0)).sigmoid()
 
 def return_ft(x, y):
     return t.FloatTensor(x), t.FloatTensor(y)
 
 device = t.device("cpu")
-dtype=t.float
+dtype = t.float
 ns = 1000 # number of samples
 lr = 0.001 # learning rate
 d_in = 2 # input dimension
 d_out = 1 # output dimension
-d_h = 50 # number of units in the hidden layer
+d_h = 10 # number of units in the hidden layer
 batch_n = 100 # batch size
 X, y = return_ft(*make_xor_dataset(ns))
 net = XORNet(d_in, d_h, d_out)
-loss_fn = t.nn.MSELoss()
+loss_fn = t.nn.BCELoss()
 opt_fn = optim.Adam(net.parameters(), lr=lr)
 
 c = 0
@@ -62,4 +62,4 @@ for epoch in np.arange(1000):
 ntest = 400
 Xtest, ytest = return_ft(*make_xor_dataset(ntest))
 ypred = net(Xtest)
-print(t.sum(ypred.squeeze() == ytest) / ntest)
+print(t.sum(t.round(ypred.squeeze()) == ytest).item() / ntest)
