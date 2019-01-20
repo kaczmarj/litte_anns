@@ -11,8 +11,8 @@ def make_xor_dataset(n_samples):
 
 def feed_batches(total_n, batch_n):
     idxs = np.arange(total_n)
-    batch_idx = [[idxs[k:min(k+batch_n, total_n)]][0]
-                 for k in np.arange(0, total_n, batch_n)]
+    batch_idx = ([idxs[k:min(k+batch_n, total_n)]][0]
+                 for k in np.arange(0, total_n, batch_n))
     for batch in batch_idx:
         yield batch
 
@@ -28,7 +28,7 @@ class XORNet(t.nn.Module):
 def return_ft(x, y):
     return t.FloatTensor(x), t.FloatTensor(y)
 
-device = t.device("cpu")
+device = t.device("cuda")
 dtype = t.float
 ns = 1000 # number of samples
 lr = 0.001 # learning rate
@@ -37,7 +37,9 @@ d_out = 1 # output dimension
 d_h = 2 # number of units in the hidden layer
 batch_n = 100 # batch size
 X, y = return_ft(*make_xor_dataset(ns))
+X, y = X.to(device), y.to(device)
 net = XORNet(d_in, d_h, d_out)
+net.to(device)
 loss_fn = t.nn.BCELoss()
 opt_fn = optim.Adam(net.parameters(), lr=lr)
 
@@ -64,6 +66,7 @@ test_results = np.zeros(1000)
 
 for idx in range(1000):
     Xtest, ytest = return_ft(*make_xor_dataset(ntest))
+    Xtest, ytest = Xtest.to(device), ytest.to(device)
     ypred = net(Xtest)
     test_results[idx] = t.sum(t.round(ypred.squeeze()) == ytest).item() / ntest
 
