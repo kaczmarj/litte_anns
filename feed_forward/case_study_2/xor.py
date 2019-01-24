@@ -5,8 +5,8 @@ import torch.optim as optim
 
 def make_xor_dataset(n_samples):
     popu = [1, 0]
-    X = np.array([np.random.choice(popu, 2) for _ in np.arange(n_samples)])
-    y = np.array([np.logical_xor(*pair) for pair in X]).astype(np.int)
+    X = np.random.choice(popu, size=(n_samples, 2))
+    y = np.logical_xor(X[:, 0], X[:, 1]).astype(np.int)
     return X, y
 
 def feed_batches(total_n, batch_n):
